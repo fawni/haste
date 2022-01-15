@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -18,7 +19,7 @@ type Data struct {
 }
 
 const (
-	version     = "1.1.0"
+	version     = "1.1.1"
 	apiEndpoint = "documents"
 )
 
@@ -55,7 +56,13 @@ func main() {
 	}
 
 	if content == "" {
-		content, *instanceUrl, *returnRaw = cmd.Execute()
+		if isPipe() {
+			scanner := bufio.NewScanner(os.Stdin)
+			scanner.Scan()
+			content = scanner.Text()
+		} else {
+			content, *instanceUrl, *returnRaw = cmd.Execute()
+		}
 	}
 
 	res := upload(*instanceUrl, content)
@@ -91,4 +98,9 @@ func upload(url string, s string) (res string) {
 	}
 
 	return
+}
+
+func isPipe() bool {
+	fi, _ := os.Stdin.Stat()
+	return fi.Mode()&os.ModeCharDevice == 0
 }

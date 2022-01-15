@@ -11,6 +11,7 @@ require (
 )
 
 require (
+	github.com/AlecAivazis/survey/v2 v2.3.2
 	github.com/elazarl/goproxy v0.0.0-20211114080932-d06c3be7c11b // indirect
 	github.com/parnurzeal/gorequest v0.2.16
 	github.com/smartystreets/goconvey v1.7.2 // indirect

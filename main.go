@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	r "github.com/parnurzeal/gorequest"
+	"github.com/x6r/haste/cmd"
 	"golang.design/x/clipboard"
 )
 
@@ -17,7 +18,7 @@ type Data struct {
 }
 
 const (
-	version     = "1.0.0"
+	version     = "1.1.0"
 	apiEndpoint = "documents"
 )
 
@@ -30,11 +31,6 @@ var (
 
 func init() {
 	log.SetFlags(0)
-
-	flag.Usage = func() {
-		fmt.Printf("usage: haste \"TEXT\"\n\n")
-		flag.PrintDefaults()
-	}
 }
 
 func main() {
@@ -59,8 +55,7 @@ func main() {
 	}
 
 	if content == "" {
-		flag.Usage()
-		os.Exit(1)
+		content, *instanceUrl, *returnRaw = cmd.Execute()
 	}
 
 	res := upload(*instanceUrl, content)
@@ -73,7 +68,7 @@ func main() {
 	fmt.Println("copied to clipboard:", res)
 }
 
-func upload(url string, s string) string {
+func upload(url string, s string) (res string) {
 	flag.Parse()
 	req := r.New()
 
@@ -88,7 +83,6 @@ func upload(url string, s string) string {
 		log.Fatalln(err)
 	}
 
-	var res string
 	switch *returnRaw {
 	case true:
 		res = fmt.Sprintf("%s/raw/%s", url, data.Key)
@@ -96,5 +90,5 @@ func upload(url string, s string) string {
 		res = fmt.Sprintf("%s/%s", url, data.Key)
 	}
 
-	return res
+	return
 }

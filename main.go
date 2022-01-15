@@ -46,10 +46,9 @@ func main() {
 
 	var content, ext string
 
-	switch *filePath {
-	case "":
+	if *filePath == "" {
 		content = flag.Arg(0)
-	default:
+	} else {
 		file, _ := os.ReadFile(*filePath)
 		content = string(file)
 		slice := strings.Split(*filePath, ".")

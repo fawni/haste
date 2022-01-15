@@ -49,7 +49,10 @@ func main() {
 	if *filePath == "" {
 		content = flag.Arg(0)
 	} else {
-		file, _ := os.ReadFile(*filePath)
+		file, err := os.ReadFile(*filePath)
+		if err != nil {
+			log.Fatalln(err)
+		}
 		content = string(file)
 		slice := strings.Split(*filePath, ".")
 		ext = slice[len(slice)-1]
@@ -82,7 +85,7 @@ func upload(url string, s string) string {
 	var data Data
 	err := json.Unmarshal([]byte(body), &data)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 
 	var res string

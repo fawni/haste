@@ -19,7 +19,7 @@ type Data struct {
 }
 
 const (
-	version     = "1.1.1"
+	version     = "1.1.2"
 	apiEndpoint = "documents"
 )
 
@@ -36,6 +36,7 @@ func init() {
 
 func main() {
 	flag.Parse()
+
 	if *printVersion {
 		fmt.Println(version)
 		os.Exit(0)
@@ -76,9 +77,7 @@ func main() {
 }
 
 func upload(url string, s string) (res string) {
-	flag.Parse()
 	req := r.New()
-
 	_, body, errs := req.Post(fmt.Sprintf("%s/%s", url, apiEndpoint)).Type("text").Send(s).End()
 	if errs != nil {
 		log.Fatalln(errs)
@@ -90,10 +89,9 @@ func upload(url string, s string) (res string) {
 		log.Fatalln(err)
 	}
 
-	switch *returnRaw {
-	case true:
+	if *returnRaw {
 		res = fmt.Sprintf("%s/raw/%s", url, data.Key)
-	default:
+	} else {
 		res = fmt.Sprintf("%s/%s", url, data.Key)
 	}
 

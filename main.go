@@ -19,7 +19,7 @@ type Data struct {
 }
 
 const (
-	version     = "1.1.2"
+	version     = "1.1.3"
 	apiEndpoint = "documents"
 )
 

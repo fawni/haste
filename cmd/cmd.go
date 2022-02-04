@@ -20,7 +20,10 @@ func Execute() (content string, instance string, raw bool) {
 		Message: "choose an instance:",
 		Options: []string{"https://p.x4.pm", "https://hastebin.cc", "other"},
 	}
-	survey.AskOne(url, &instance)
+
+	if err := survey.AskOne(url, &instance); err != nil {
+		log.Fatalln(err)
+	}
 
 	if instance == "other" {
 		custom := &survey.Input{
@@ -34,7 +37,10 @@ func Execute() (content string, instance string, raw bool) {
 	prompt := &survey.Confirm{
 		Message: "return raw file?",
 	}
-	survey.AskOne(prompt, &raw)
+
+	if err := survey.AskOne(prompt, &raw); err != nil {
+		log.Fatalln(err)
+	}
 
 	return
 }

@@ -19,7 +19,7 @@ type Data struct {
 }
 
 const (
-	version     = "1.1.3"
+	version     = "1.1.4"
 	apiEndpoint = "documents"
 )
 
@@ -43,7 +43,6 @@ func main() {
 	}
 
 	var content, ext string
-
 	if *filePath == "" {
 		content = flag.Arg(0)
 	} else {
@@ -69,7 +68,7 @@ func main() {
 	res := upload(*instanceUrl, content)
 
 	if ext != "" {
-		res = fmt.Sprintf("%s.%s", res, ext)
+		res += "." + ext
 	}
 
 	clipboard.Write(clipboard.FmtText, []byte(res))
@@ -78,9 +77,14 @@ func main() {
 
 func upload(url string, s string) (res string) {
 	req := r.New()
-	_, body, errs := req.Post(fmt.Sprintf("%s/%s", url, apiEndpoint)).Type("text").Send(s).End()
+	resp, body, errs := req.Post(fmt.Sprintf("%s/%s", url, apiEndpoint)).Type("text").Send(s).End()
+
 	if errs != nil {
 		log.Fatalln(errs)
+	}
+
+	if resp.StatusCode != 200 {
+		log.Fatalln(resp.Status)
 	}
 
 	var data Data

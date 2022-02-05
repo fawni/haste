@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strings"
+	"path/filepath"
 
 	r "github.com/parnurzeal/gorequest"
 	"github.com/x6r/haste/cmd"
@@ -18,15 +18,15 @@ type Data struct {
 }
 
 const (
-	version     = "1.1.5"
-	apiEndpoint = "documents"
+	ver   = "1.1.6"
+	endpt = "documents"
 )
 
 var (
-	instanceUrl  = flag.String("i", "https://p.x4.pm", "hastebin instance where the content will be uploaded")
-	filePath     = flag.String("f", "", "upload a file")
-	returnRaw    = flag.Bool("r", false, "returns raw url")
-	printVersion = flag.Bool("v", false, "prints program version")
+	instance = flag.String("i", "https://p.x4.pm", "hastebin instance where the content will be uploaded")
+	filename = flag.String("f", "", "upload a file")
+	raw      = flag.Bool("r", false, "returns raw url")
+	prntver  = flag.Bool("v", false, "prints program version")
 )
 
 func init() {
@@ -36,46 +36,42 @@ func init() {
 func main() {
 	flag.Parse()
 
-	if *printVersion {
-		fmt.Println(version)
+	if *prntver {
+		fmt.Println(ver)
 		os.Exit(0)
 	}
 
 	var content, ext string
-	if *filePath == "" {
+	if *filename == "" {
 		content = flag.Arg(0)
 	} else {
-		file, err := os.ReadFile(*filePath)
+		file, err := os.ReadFile(*filename)
 		if err != nil {
 			log.Fatalln(err)
 		}
 		content = string(file)
-		slice := strings.Split(*filePath, ".")
-		ext = slice[len(slice)-1]
+		ext = filepath.Ext(*filename)
 	}
 
 	if content == "" {
-		if isPipe() {
+		if pipe() {
 			scanner := bufio.NewScanner(os.Stdin)
 			scanner.Scan()
 			content = scanner.Text()
 		} else {
-			content, *instanceUrl, *returnRaw = cmd.Execute()
+			content, *instance, *raw = cmd.Execute()
 		}
 	}
 
-	res := upload(*instanceUrl, content)
-
-	if ext != "" {
-		res += "." + ext
-	}
+	res := upload(*instance, content)
+	res += ext
 
 	fmt.Println(res)
 }
 
 func upload(url string, s string) (res string) {
 	req := r.New()
-	resp, body, errs := req.Post(fmt.Sprintf("%s/%s", url, apiEndpoint)).Type("text").Send(s).End()
+	resp, body, errs := req.Post(fmt.Sprintf("%s/%s", url, endpt)).Type("text").Send(s).End()
 
 	if errs != nil {
 		log.Fatalln(errs)
@@ -91,7 +87,7 @@ func upload(url string, s string) (res string) {
 		log.Fatalln(err)
 	}
 
-	if *returnRaw {
+	if *raw {
 		res = fmt.Sprintf("%s/raw/%s", url, data.Key)
 	} else {
 		res = fmt.Sprintf("%s/%s", url, data.Key)
@@ -100,7 +96,7 @@ func upload(url string, s string) (res string) {
 	return
 }
 
-func isPipe() bool {
+func pipe() bool {
 	fi, _ := os.Stdin.Stat()
 	return fi.Mode()&os.ModeCharDevice == 0
 }

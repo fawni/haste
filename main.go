@@ -11,7 +11,6 @@ import (
 
 	r "github.com/parnurzeal/gorequest"
 	"github.com/x6r/haste/cmd"
-	"golang.design/x/clipboard"
 )
 
 type Data struct {
@@ -19,7 +18,7 @@ type Data struct {
 }
 
 const (
-	version     = "1.1.4"
+	version     = "1.1.5"
 	apiEndpoint = "documents"
 )
 
@@ -71,8 +70,7 @@ func main() {
 		res += "." + ext
 	}
 
-	clipboard.Write(clipboard.FmtText, []byte(res))
-	fmt.Println("copied to clipboard:", res)
+	fmt.Println(res)
 }
 
 func upload(url string, s string) (res string) {

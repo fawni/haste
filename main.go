@@ -13,6 +13,7 @@ import (
 	"github.com/x6r/haste/cmd"
 )
 
+// Data is where we store the hastebin response which holds the key to our paste
 type Data struct {
 	Key string `json:"key,omitempty"`
 }
@@ -62,7 +63,7 @@ func main() {
 			}
 			content = buf.String()
 		} else {
-			content, *instance, *raw = cmd.Execute()
+			content, *instance, *raw = cmd.Run()
 		}
 	}
 

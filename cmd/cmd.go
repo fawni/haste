@@ -7,7 +7,8 @@ import (
 	"github.com/AlecAivazis/survey/v2/terminal"
 )
 
-func Execute() (content string, instance string, raw bool) {
+// Run prompts the user for data interactively if there are no args provided
+func Run() (content string, instance string, raw bool) {
 	text := &survey.Multiline{
 		Message: "enter text to upload",
 	}

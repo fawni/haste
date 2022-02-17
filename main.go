@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bufio"
+	"bytes"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -55,9 +55,9 @@ func main() {
 
 	if content == "" {
 		if pipe() {
-			scanner := bufio.NewScanner(os.Stdin)
-			scanner.Scan()
-			content = scanner.Text()
+			buf := bytes.NewBuffer(nil)
+			buf.ReadFrom(os.Stdin)
+			content = buf.String()
 		} else {
 			content, *instance, *raw = cmd.Execute()
 		}

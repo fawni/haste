@@ -18,7 +18,7 @@ type Data struct {
 }
 
 const (
-	ver   = "1.1.6"
+	ver   = "1.1.7"
 	endpt = "documents"
 )
 

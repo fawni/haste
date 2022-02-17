@@ -56,7 +56,10 @@ func main() {
 	if content == "" {
 		if pipe() {
 			buf := bytes.NewBuffer(nil)
-			buf.ReadFrom(os.Stdin)
+			_, err := buf.ReadFrom(os.Stdin)
+			if err != nil {
+				log.Fatalln(err)
+			}
 			content = buf.String()
 		} else {
 			content, *instance, *raw = cmd.Execute()

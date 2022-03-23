@@ -1,14 +1,29 @@
 # haste
 
-haste is a cross-platform hastebin CLI client.
+> Be really pretty. Be really simple.
 
-## installation
+[![Latest Release](https://img.shields.io/github/release/x6r/haste.svg)](https://github.com/x6r/haste/releases)
+[![Build Status](https://img.shields.io/github/workflow/status/x6r/haste/build?logo=github)](https://github.com/x6r/haste/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/x6r/haste)](https://goreportcard.com/report/github.com/x6r/haste)
+
+haste is a simple cross-platform hastebin command-line client.
+
+## Installation
+
+### Binaries
+
+download a binary from the [releases](https://github.com/x6r/haste/releases)
+page.
+
+### Build from source
+
+Go 1.16 or higher required. ([install instructions](https://golang.org/doc/install.html))
 
 ```sh
 go install github.com/x6r/haste@latest
 ```
 
-## usage
+## Usage
 
 ```sh
 $ haste # interactively prompts you for data
@@ -19,9 +34,9 @@ $ echo "text" | haste -i "https://hastebin.cc" -r # uploads "text" to a custom h
 
 `haste -h` for more info.
 
-## notes
+## Disclaimer
 
-default haste instance is [my own](https://p.x4.pm), i **highly** recommend you use a more reliable instance such as [hastebin.cc](https://hastebin.cc).
+the client defaults to [my own](https://p.x4.pm) instance. it is recommended to use a more reliable instance such as [hastebin.cc](https://hastebin.cc).
 
 ## license
 

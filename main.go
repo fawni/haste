@@ -13,7 +13,7 @@ import (
 	"github.com/x6r/haste/cmd"
 )
 
-// Data is where we store the hastebin response which holds the key to our paste
+// Data is a struct that holds hastebin response
 type Data struct {
 	Key string `json:"key,omitempty"`
 }

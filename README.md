@@ -3,7 +3,7 @@
 > Be really pretty. Be really simple.
 
 [![Latest Release](https://img.shields.io/github/release/x6r/haste.svg)](https://github.com/x6r/haste/releases)
-[![Build Status](https://img.shields.io/github/workflow/status/x6r/haste/build?logo=github)](https://github.com/x6r/haste/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/x6r/haste/build.yml?logo=github&branch=master)](https://github.com/x6r/haste/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/x6r/haste)](https://goreportcard.com/report/github.com/x6r/haste)
 
 haste is a simple cross-platform hastebin command-line client.

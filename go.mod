@@ -1,4 +1,4 @@
-module github.com/x6r/haste
+module github.com/fawni/haste
 
 go 1.16
 

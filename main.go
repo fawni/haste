@@ -9,8 +9,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/fawni/haste/cmd"
 	r "github.com/parnurzeal/gorequest"
-	"github.com/x6r/haste/cmd"
 )
 
 // Data is a struct that holds hastebin response

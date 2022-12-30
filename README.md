@@ -2,9 +2,9 @@
 
 > Be really pretty. Be really simple.
 
-[![Latest Release](https://img.shields.io/github/release/x6r/haste.svg)](https://github.com/x6r/haste/releases)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/x6r/haste/build.yml?logo=github&branch=master)](https://github.com/x6r/haste/actions)
-[![Go Report Card](https://goreportcard.com/badge/github.com/x6r/haste)](https://goreportcard.com/report/github.com/x6r/haste)
+[![Latest Release](https://img.shields.io/github/release/fawni/haste.svg)](https://github.com/fawni/haste/releases)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/fawni/haste/build.yml?logo=github&branch=master)](https://github.com/fawni/haste/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/fawni/haste)](https://goreportcard.com/report/github.com/fawni/haste)
 
 haste is a simple cross-platform hastebin command-line client.
 
@@ -12,7 +12,7 @@ haste is a simple cross-platform hastebin command-line client.
 
 ### Binaries
 
-download a binary from the [releases](https://github.com/x6r/haste/releases)
+download a binary from the [releases](https://github.com/fawni/haste/releases)
 page.
 
 ### Build from source
@@ -20,7 +20,7 @@ page.
 Go 1.16 or higher required. ([install instructions](https://golang.org/doc/install.html))
 
 ```sh
-go install github.com/x6r/haste@latest
+go install github.com/fawni/haste@latest
 ```
 
 ## Usage
@@ -40,4 +40,4 @@ the client defaults to [my own](https://p.x4.pm) instance. it is recommended to 
 
 ## license
 
-[ISC](https://github.com/x6r/haste/blob/master/LICENSE)
+[ISC](https://github.com/fawni/haste/blob/master/LICENSE)
